@@ -50,3 +50,67 @@ a.catch((mens)=>{console.log('Try Again')})
 
 =========================================================================
 
+Usando Async/Await
+
+function bestRockband() {
+    return new Promise((resolve,reject) =>{
+
+        if(band = 'Breaking Benjamin'){
+            resolve({
+                sucess: true,
+                bandName:band,
+                msg: band + 'is the best rock ever!'
+            });
+        }else{
+            reject({
+                sucess:false,
+                msg:'I\'m not so sure'
+            })
+        }
+
+    })
+}
+
+//==============================================
+
+function bestRockSong(response){
+    return new Promise((resolve,reject) =>{
+
+        if(response.sucess){
+            resolve('Do you see that?'+ response.bandName)
+        }else{
+            reject('Do you know BB?')
+        }
+
+    })
+}
+/*
+//Call .then e .catch
+bestRockband('Breaking Benjamin')
+    .then(response => {
+        console.log('Cheking the answer...')
+        return bestRockband(response)
+    })
+    .then(response =>{
+        console.log('Find the best song...')
+        console.log(response)
+    })
+    .catch(err => {
+        console.log(err)
+
+    })
+
+*/
+
+//Uso do Async/ Await
+
+async function showThat(){
+    const bestRockResponse = await bestRockband('Breaking Benjamin');
+    console.log(bestRockResponse)
+    const bestSongResponse = await bestRockSong(bestRockResponse)
+    console.log(bestSongResponse)
+
+}
+
+//call function
+showThat()
